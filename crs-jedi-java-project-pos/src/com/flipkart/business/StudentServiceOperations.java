@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
 
-public class StudentBusiness {
+public class StudentServiceOperations implements StudentServiceInterface {
 	public void payBills(int id) {
 		System.out.println("Bill payment");
 	}

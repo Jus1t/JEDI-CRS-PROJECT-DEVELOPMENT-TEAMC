@@ -8,7 +8,8 @@ import com.flipkart.bean.Course;
 /**
  * 
  */
-public class AdminBusiness {
+
+public class AdminServiceOperations implements AdminServiceInterface {
 
 	public void addCourse(int id) {
 

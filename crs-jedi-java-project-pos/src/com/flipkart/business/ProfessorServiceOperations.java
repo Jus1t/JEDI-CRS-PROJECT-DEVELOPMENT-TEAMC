@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.flipkart.bean.Course;
 
-public class ProfessorBusiness {
+public class ProfessorServiceOperations implements ProfessorServiceInterface{
 
 	public void selectcourse(int profid) {
 

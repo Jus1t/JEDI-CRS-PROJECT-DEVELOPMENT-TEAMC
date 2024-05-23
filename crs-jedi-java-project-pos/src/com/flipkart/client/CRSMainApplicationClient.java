@@ -8,6 +8,9 @@ import java.util.Scanner;
 
 import com.flipkart.bean.Student;
 
+// notification, transaction, designation--->roles
+
+
 public class CRSMainApplicationClient {
 	public static HashMap<Integer, Student> students = new HashMap<Integer, Student>();
 	public static Scanner sc = new Scanner(System.in);

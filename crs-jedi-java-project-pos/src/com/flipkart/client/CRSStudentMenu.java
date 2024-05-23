@@ -1,4 +1,5 @@
 package com.flipkart.client;
+import com.flipkart.business.StudentServiceInterface;
 
 import com.flipkart.bean.*;
 import com.flipkart.business.*;
@@ -21,7 +22,7 @@ public class CRSStudentMenu {
 	public void ShowOptions() {
 		// TODO Auto-generated method stub
 		Scanner sc= new Scanner(System.in);
-		StudentBusiness biz = new StudentBusiness();
+		StudentServiceInterface biz = new StudentServiceOperations();
 		int a=1;
 		while(a!=0)
 		{
