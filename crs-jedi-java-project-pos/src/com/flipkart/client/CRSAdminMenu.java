@@ -39,6 +39,7 @@ public class CRSAdminMenu {
 			System.out.println("6. Add Professor ");
 			System.out.println("7. Approve Student ");
 			System.out.println("8. View Pending Admission");
+			System.out.println("9. View Professors");
 			System.out.println("0. Exit ");
 			a = sc.nextInt();
 
@@ -109,6 +110,26 @@ public class CRSAdminMenu {
 				AdminServiceInterface adi=new AdminServiceOperations();
 				adi.registerProfessor(id, name, phone, email, password, department, designation);
 				System.out.println("Registered succesfully");
+			case 7:
+				System.out.println("Enter student id to approve");
+				int studentId=sc.nextInt();
+				AdminServiceInterface admini=new AdminServiceOperations();
+				admini.approveStudent(studentId);
+				break;
+			case 8:
+				AdminServiceInterface ad=new AdminServiceOperations();
+				ArrayList<Student>studentList=ad.viewUnapprovedRegistrations();
+				for(Student st:studentList) {
+					System.out.println(st.getId()+" "+st.getName());
+				}
+				break;
+			case 9:
+				AdminServiceInterface ad1=new AdminServiceOperations();
+				ArrayList<Professor>professorList=ad1.viewProfessors();
+				for(Professor professor:professorList) {
+					System.out.println(professor.getId()+" "+professor.getName());
+				}
+				break;
 			default:
 				continue;
 			}

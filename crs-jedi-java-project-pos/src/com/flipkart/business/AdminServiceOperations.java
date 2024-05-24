@@ -76,4 +76,24 @@ public class AdminServiceOperations implements AdminServiceInterface {
 		adi.registerProfessor(pro);
 	}
 
+	@Override
+	public void approveStudent(int studentId) {
+		// TODO Auto-generated method stub
+		adi.approveStudent(studentId);
+	}
+
+	@Override
+	public ArrayList<Student> viewUnapprovedRegistrations() {
+		// TODO Auto-generated method stub
+		ArrayList<Student>x=adi.viewUnapprovedRegistrations();
+		return x;
+	}
+
+	@Override
+	public ArrayList<Professor> viewProfessors() {
+		// TODO Auto-generated method stub
+		ArrayList<Professor>prof=adi.viewProfessors();
+		return prof;
+	}
+
 }
