@@ -65,5 +65,7 @@ public interface StudentDAOInterface {
 	 * @throws SQLException
 	 */
 	public boolean getRegistrationStatus(int studentId) throws SQLException;
+	
+	public ArrayList<Course> viewCourses(int studentId) throws SQLException;
 
 }
