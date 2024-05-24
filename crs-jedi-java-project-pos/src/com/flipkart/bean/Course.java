@@ -5,6 +5,25 @@ public class Course {
 	private String courseName;
 	private int instructorID;
 	private int enrolled_students;
+	private boolean isOffered = true;
+
+	public boolean isOffered() {
+		return isOffered;
+	}
+
+	public void setOffered(boolean isOffered) {
+		this.isOffered = isOffered;
+	}
+
+	public Course() {
+
+	}
+
+	public Course(int id, String name, int instId) {
+		this.courseID = id;
+		this.courseName = name;
+		this.instructorID = instId;
+	}
 
 	public int getCourseID() {
 		return courseID;

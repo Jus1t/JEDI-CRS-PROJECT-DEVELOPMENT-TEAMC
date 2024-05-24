@@ -4,8 +4,8 @@ public class Student extends User {
 	private String branch;
 	private String batch;
 
-	public Student(String name, int id, String phone, String email, String password, String branch, String batch) {
-		super(name, id, phone, email, password);
+	public Student( int id, String name, String phone, String email, String password, String branch, String batch) {
+		super(id,name, phone, email, password);
 		this.branch = branch;
 		this.batch = batch;
 	}

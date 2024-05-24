@@ -1,7 +1,7 @@
 package com.flipkart.business;
 
 public interface ProfessorServiceInterface {
-	public void selectcourse(int profid);
+	public void selectCourse(int profId,int courseId);
 
-	public void submitgrade(int profid);
+	public void submitGrade(int studentId,int courseId,String grade);
 }

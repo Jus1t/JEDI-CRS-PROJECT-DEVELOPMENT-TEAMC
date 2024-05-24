@@ -1,14 +1,15 @@
-/**
- * 
- */
 package com.flipkart.dao;
 
-import java.util.List;
+import java.util.ArrayList;
+
 
 import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
+import com.flipkart.exception.AuthenticationException;
+import com.flipkart.exception.CourseExistsAlreadyException;
+import com.flipkart.exception.CourseNotFoundException;
 
 
 /**
@@ -16,29 +17,23 @@ import com.flipkart.bean.User;
  * Interface for Admin Dao Operations
  *
  */
-public interface AdminDaoInterface {
+public interface AdminDAOInterface {
 	
-
-	public void deleteCourse(String courseCode);
 	
-	public void addCourse(Course course);
+	public void addCourse(Course course) throws CourseExistsAlreadyException ;
 
-	public List<Student> viewPendingAdmissions();
+	public void deleteCourse(int id) throws CourseNotFoundException;
+
+	public ArrayList<Course> showCourses();
+
+	public void closeRegistration(int id);
+
+	public void assignCourse(int courseId, int instructorId);
 	
-
-	public void approveStudent(int studentId);
+	public void registerStudent(Student student);
 	
-
-	public void addProfessor(Professor professor);
-
-	public void addUser(User user);
+	public String verifyCredentials(int id,String password) throws AuthenticationException;
 	
+	public void registerProfessor(Professor prof);
 
-	public void assignCourse(String courseCode, String professorId);
-	
-
-	public List<Course> viewCourses(int catalogId);
-	
-
-	public List<Professor> viewProfessors();
 }

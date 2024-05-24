@@ -4,9 +4,9 @@ public class Professor extends User {
 	private String department;
 	private String designation;
 
-	public Professor(String name, int id, String phone, String email, String password, String department,
+	public Professor(int id,String name, String phone, String email, String password, String department,
 			String designation) {
-		super(name, id, phone, email, password);
+		super(id, name, phone, email, password);
 		this.department = department;
 		this.designation = designation;
 		// TODO Auto-generated constructor stub

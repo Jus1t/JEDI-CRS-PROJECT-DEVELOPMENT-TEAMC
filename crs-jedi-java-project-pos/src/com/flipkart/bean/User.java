@@ -16,7 +16,7 @@ public class User {
 		this.role = role;
 	}
 
-	public User(String name, int id, String phone, String email, String password) {
+	public User(int id,String name,  String phone, String email, String password) {
 		super();
 		this.name = name;
 		this.id = id;

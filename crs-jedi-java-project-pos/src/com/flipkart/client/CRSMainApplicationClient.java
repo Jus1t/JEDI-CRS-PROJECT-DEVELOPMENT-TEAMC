@@ -7,9 +7,11 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import com.flipkart.bean.Student;
-
+import com.flipkart.business.*;
+import com.flipkart.exception.AuthenticationException;
 // notification, transaction, designation--->roles
-
+import com.flipkart.exception.CourseAlreadyRegisteredException;
+import com.flipkart.exception.CourseLimitExceededException;
 
 public class CRSMainApplicationClient {
 	public static HashMap<Integer, Student> students = new HashMap<Integer, Student>();
@@ -24,7 +26,12 @@ public class CRSMainApplicationClient {
 			switch (choice) {
 			case 1:
 				// login
-				loginUser();
+				try {
+					loginUser();
+				} catch (AuthenticationException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				break;
 			case 2:
 				// registration
@@ -59,8 +66,9 @@ public class CRSMainApplicationClient {
 		System.out.println("Write batch");
 		String batch = sc.next();
 
-		Student student = new Student(name, id, phone, email, password, branch, batch);
-		students.put(id, student);
+		Student student = new Student(id, name, phone, email, password, branch, batch);
+		AdminServiceInterface adi = new AdminServiceOperations();
+		adi.registerStudent(id, name, phone, email, password, branch, batch);
 		System.out.println("Registered succesfully");
 	}
 
@@ -73,19 +81,38 @@ public class CRSMainApplicationClient {
 	public static void ChangePassword() {
 		System.out.println("Write id");
 		int id = sc.nextInt();
+		System.out.println("Write old password");
+		String oldPW = sc.next();
 		System.out.println("Write new password");
 		String newPW = sc.next();
-		students.get(id).setPassword(newPW);
+		UserServiceInterface adi = new UserServiceOperations();
+		adi.updatePassword(id, oldPW, newPW);
 		System.out.println("Password updated");
 	}
 
-	public static void loginUser() {
-		System.out.println("Write id");
+	public static void loginUser() throws AuthenticationException {
+
+		AdminServiceInterface adi = new AdminServiceOperations();
+		System.out.println("Write userId");
 		int id = sc.nextInt();
 		System.out.println("Write password");
 		String password = sc.next();
-		System.out.println("Write role (professor, admin, student)");
-		String role = sc.next();
+		String role = null;
+		try {
+		    role = adi.verifyCredentials(id, password);
+		    
+		    if (role == null) {
+		        // Throw an exception if role is null
+		    	System.out.println("Invalid credentials!");
+		        throw new AuthenticationException();
+		    }
+		} catch (AuthenticationException e) {
+		    throw e;
+		}
+//		if (role == null) {
+//			System.out.println("Invalid credentials!");
+//			return;
+//		}
 
 		switch (role) {
 		case "professor":
@@ -98,7 +125,14 @@ public class CRSMainApplicationClient {
 			System.out.println("Logging as Student ... ");
 			// student menu
 			CRSStudentMenu stMenu = new CRSStudentMenu(id);
-			stMenu.ShowOptions();
+			try {
+				stMenu.ShowOptions();
+			} catch (CourseLimitExceededException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (Exception e) {
+
+			}
 			break;
 		case "admin":
 			System.out.println("Logging as an Admin ... ");

@@ -29,10 +29,20 @@ public class CRSProfessorMenu {
 			case 0:
 				return;
 			case 1:
-				biz.selectcourse(profId);
+				System.out.println("Enter your profId ");
+				int profId2 = sc.nextInt();
+				System.out.println("Enter your courseId ");
+				int courseId2 = sc.nextInt();
+				biz.selectCourse(profId2,courseId2);
 				break;
 			case 2:
-				biz.submitgrade(profId);
+				System.out.println("Enter studentId");
+				int studentId=sc.nextInt();
+				System.out.println("Enter courseId");
+				int courseId=sc.nextInt();
+				System.out.println("Enter grade");
+				String grade=sc.next();
+				biz.submitGrade(studentId,courseId,grade);
 				break;
 			default:
 				System.out.println("Invalid choice");
