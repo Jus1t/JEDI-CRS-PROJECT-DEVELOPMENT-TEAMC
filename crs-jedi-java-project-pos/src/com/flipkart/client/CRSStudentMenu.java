@@ -35,7 +35,7 @@ public class CRSStudentMenu {
 			System.out.println("Enter the choice: ");
 			System.out.println("1. Register course ");
 			System.out.println("2. View the result ");
-			System.out.println("3. View the catalogue ");
+			System.out.println("3. View offered courses ");
 			System.out.println("4. Pay Bills ");
 			System.out.println("5. Drop Course ");
 			System.out.println("6. View Registered Courses ");
@@ -82,8 +82,10 @@ public class CRSStudentMenu {
 				}
 				break;
 			case 3:
-				AdminServiceInterface biz2 = new AdminServiceOperations();
-				ArrayList<Course> x = biz2.showCourses();
+				System.out.println("1. Enter your studentId");
+				studentId=sc.nextInt();
+				StudentServiceInterface biz2 = new StudentServiceOperations();
+				ArrayList<Course> x = biz2.viewCourses(studentId);
 				System.out.println("\n\n");
 				for (Course c : x) {
 					System.out.println(c.getCourseName());

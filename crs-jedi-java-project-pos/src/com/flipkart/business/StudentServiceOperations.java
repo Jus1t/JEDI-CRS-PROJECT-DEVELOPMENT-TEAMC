@@ -83,5 +83,11 @@ public class StudentServiceOperations implements StudentServiceInterface {
 		boolean status=sdi.getRegistrationStatus(studentId);
 		return status;
 	}
+	
+	public ArrayList<Course> viewCourses(int studentId) throws SQLException
+	{
+		ArrayList<Course> courses= sdi.viewCourses(studentId);
+		return courses;
+	}
 
 }

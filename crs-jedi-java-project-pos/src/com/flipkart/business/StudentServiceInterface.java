@@ -26,7 +26,9 @@ public interface StudentServiceInterface {
 	
 	public boolean seatAvailable(int courseId) throws SQLException;
 	
-	public boolean isRegistered(String courseCode, int studentId) throws SQLException;
+	public boolean isRegistered(int courseCode, int studentId) throws SQLException;
 	
 	public boolean getRegistrationStatus(int studentId) throws SQLException;
+	
+	public ArrayList<Course> viewCourses(int studentId) throws SQLException;
 }
