@@ -34,7 +34,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "select courseId, courseName, instructorId from Course";
-			String sql=SQLConstants.COURSE_DETAILS;
+			String sql = SQLConstants.COURSE_DETAILS;
 			statement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = statement.executeQuery();
@@ -45,9 +45,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				course.setCourseID(resultSet.getInt(1));
 				course.setCourseName(resultSet.getString(2));
 				course.setInstructorID(resultSet.getInt(3));
-				course.setEnrolled_students(resultSet.getInt(4));
-				course.setOffered(resultSet.getBoolean(5));
-				course.setCourseFee(resultSet.getInt(6));
 				courseList.add(course);
 
 			}
@@ -67,7 +64,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "insert into Course(courseId, courseName, instructorId, enrolledStudents, isOffered) values (?, ?, ?, ?, ?)";
-			String sql=SQLConstants.COURSE_INSERTION;
+			String sql = SQLConstants.COURSE_INSERTION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, course.getCourseID());
 			statement.setString(2, course.getCourseName());
@@ -85,29 +82,26 @@ public class AdminDAOImpl implements AdminDAOInterface {
 	}
 
 	@Override
-	public void deleteCourse(int id) throws CourseNotFoundException{
+	public void deleteCourse(int id) throws CourseNotFoundException {
 		statement = null;
 		try {
 
 //			String sql = "delete from Course where courseId = ?";
-			String sql=SQLConstants.COURSE_DELETION;
+			String sql = SQLConstants.COURSE_DELETION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			int row = statement.executeUpdate();
-			
-			if(row==0)
-			{
+
+			if (row == 0) {
 				System.out.println("Course not found");
-		        throw new CourseNotFoundException(id);
+				throw new CourseNotFoundException(id);
 			}
 
 			System.out.println(row + " course deleted");
-			
-			
 
 		} catch (SQLException se) {
 			throw new CourseNotFoundException(id);
-			
+
 		}
 
 	}
@@ -119,7 +113,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "update Course set isOffered=false where courseId = ?";
-			String sql=SQLConstants.CLOSE_REGISTRATION;
+			String sql = SQLConstants.CLOSE_REGISTRATION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			int row = statement.executeUpdate();
@@ -139,7 +133,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "update Course set instructorId=? where courseId = ?";
-			String sql=SQLConstants.ASSIGN_COURSE;
+			String sql = SQLConstants.ASSIGN_COURSE;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, instructorId);
 			statement.setInt(2, courseId);
@@ -158,7 +152,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
-			String sql=SQLConstants.INSERT_USER;
+			String sql = SQLConstants.INSERT_USER;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, student.getId());
 			statement.setString(2, student.getName());
@@ -175,7 +169,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "insert into Student(studentId,branch,batch) values (?, ?, ?)";
-			String sql=SQLConstants.INSERT_STUDENT;
+			String sql = SQLConstants.INSERT_STUDENT;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, student.getId());
 			statement.setString(2, student.getBranch());
@@ -189,8 +183,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		}
 
 	}
-	
-	public String verifyCredentials(int id,String password) throws AuthenticationException{
+
+	public String verifyCredentials(int id, String password) throws AuthenticationException {
 		statement = null;
 		ResultSet resultSet = null;
 		String role = null;
@@ -198,15 +192,15 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "select * from User where userId=? AND password=?";
-			String sql=SQLConstants.VERIFY_CREDENTIALS;
+			String sql = SQLConstants.VERIFY_CREDENTIALS;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			statement.setString(2, password);
 			resultSet = statement.executeQuery();
-			  if (resultSet.next()) {
-		            // User exists with given credentials
-				  role = resultSet.getString("role");
-		        }
+			if (resultSet.next()) {
+				// User exists with given credentials
+				role = resultSet.getString("role");
+			}
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -215,13 +209,12 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		return role;
 	}
 
-	
 	public void registerProfessor(Professor prof) {
 		statement = null;
 		try {
 
 //			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
-			String sql=SQLConstants.INSERT_USER;
+			String sql = SQLConstants.INSERT_USER;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, prof.getId());
 			statement.setString(2, prof.getName());
@@ -238,7 +231,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		try {
 
 //			String sql = "insert into Professor(profId,designation,department) values (?, ?, ?)";
-			String sql=SQLConstants.INSERT_PROFESSOR;
+			String sql = SQLConstants.INSERT_PROFESSOR;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, prof.getId());
 			statement.setString(2, prof.getDesignation());
@@ -251,46 +244,47 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			System.out.println(se);
 		}
 
-		
 	}
+
 	@Override
 	public void approveStudent(int studentId) {
-		
+
 		statement = null;
 		try {
 			String sql = SQLConstants.APPROVE_STUDENT_QUERY;
 			statement = connection.prepareStatement(sql);
-			
-			statement.setInt(1,studentId);
+
+			statement.setInt(1, studentId);
 			int row = statement.executeUpdate();
-			
+
 			System.out.println(row + " student approved.");
-			
-			
-			//logger.info("Student with studentId: " + studentId + " approved by admin.");
-			
-		}catch(SQLException se) {
-			
+
+			// logger.info("Student with studentId: " + studentId + " approved by admin.");
+
+		} catch (SQLException se) {
+
 			System.out.println(se.getMessage());
-			
+
 		}
-		
+
 	}
 
 	@Override
 	public ArrayList<Student> viewUnapprovedRegistrations() {
-		
+
 		statement = null;
 		ArrayList<Student> userList = new ArrayList<Student>();
 		try {
-			
+
 			String sql = SQLConstants.VIEW_PENDING_ADMISSION_QUERY;
 			statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
 
-			while(resultSet.next()) {
-				// int id, String name, String phone, String email, String password, String branch, String batch
-				// "select userId, username, password, phone, email, role, studentId, branch, batch from Student natural join User where isApproved = 0";
+			while (resultSet.next()) {
+				// int id, String name, String phone, String email, String password, String
+				// branch, String batch
+				// "select userId, username, password, phone, email, role, studentId, branch,
+				// batch from Student natural join User where isApproved = 0";
 				Student user = new Student();
 				user.setId(resultSet.getInt(1));
 				user.setName(resultSet.getString(2));
@@ -302,19 +296,19 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				user.setBatch(resultSet.getString(9));
 
 				userList.add(user);
-				
+
 			}
-			
+
 			System.out.println(userList.size() + " students have pending-approval.");
-			
-		}catch(SQLException se) {
-			
+
+		} catch (SQLException se) {
+
 			System.out.println(se.getMessage());
-			
+
 		}
-		
+
 		return userList;
-		
+
 	}
 
 	@Override
@@ -322,13 +316,13 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		ArrayList<Professor> professorList = new ArrayList<>();
 		try {
-			
+
 			String sql = SQLConstants.VIEW_PROFESSOR_QUERY;
 			statement = connection.prepareStatement(sql);
 			ResultSet resultSet = statement.executeQuery();
-			
-			while(resultSet.next()) {
-				
+
+			while (resultSet.next()) {
+
 				Professor professor = new Professor();
 				professor.setId(resultSet.getInt(1));
 				professor.setName(resultSet.getString(2));
@@ -339,19 +333,55 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				professor.setDepartment(resultSet.getString(8));
 				professor.setDesignation(resultSet.getString(9));
 				professorList.add(professor);
-				
+
 			}
-			
+
 			System.out.println(professorList.size() + " professors in the institute.");
-			
-		}catch(SQLException se) {
-			
+
+		} catch (SQLException se) {
+
 			System.out.println(se.getMessage());
-			
+
 		}
 		return professorList;
 	}
-	
-	
+
+	@Override
+	public void approveCourse(int courseId, int studentId) {
+		// TODO Auto-generated method stub
+		statement = null;
+		try {
+			String sql = SQLConstants.APPROVE_COURSE_QUERY;
+			statement = connection.prepareStatement(sql);
+
+			statement.setInt(1, courseId);
+			statement.setInt(2, studentId);
+			int row = statement.executeUpdate();
+
+			System.out.println(row + " course approved.");
+
+			sql = "select enrolledStudents from Course where courseId=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, courseId);
+			ResultSet resultSet = statement.executeQuery();
+			int numStudents=0;
+			while (resultSet.next()) {
+				numStudents=resultSet.getInt(1);
+			}
+
+			System.out.println(numStudents);
+			sql = "update Course set enrolledStudents=? where courseId=?";
+			statement = connection.prepareStatement(sql);
+			statement.setInt(1, numStudents+1);
+			statement.setInt(2, courseId);
+			statement.executeUpdate();
+			// logger.info("Student with studentId: " + studentId + " approved by admin.");
+
+		} catch (SQLException se) {
+
+			System.out.println(se.getMessage());
+
+		}
+	}
 
 }

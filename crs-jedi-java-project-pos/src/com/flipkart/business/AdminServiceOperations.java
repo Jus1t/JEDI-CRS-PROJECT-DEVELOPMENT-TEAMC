@@ -96,4 +96,11 @@ public class AdminServiceOperations implements AdminServiceInterface {
 		return prof;
 	}
 
+	@Override
+	public void approveCourse(int courseId,int studentId) {
+		// TODO Auto-generated method stub
+		adi.approveCourse(courseId,studentId);
+		
+	}
+
 }

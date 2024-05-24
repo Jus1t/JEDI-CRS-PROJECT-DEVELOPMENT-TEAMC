@@ -36,6 +36,7 @@ public class StudentServiceOperations implements StudentServiceInterface {
 		try {
 //			StudentDAOInterface sdi = new StudentDAOImpl();
 			res = sdi.registerCourse(studentId, courseId, semester);
+			
 		} catch (SQLException x) {
 			throw new CourseLimitExceededException(courseId);
 		}
@@ -45,7 +46,7 @@ public class StudentServiceOperations implements StudentServiceInterface {
 	@Override
 	public boolean dropCourse(int courseId, int studentId) throws SQLException {
 		// 
-		boolean isDrop=sdi.dropCourse(courseId, studentId)
+		boolean isDrop=sdi.dropCourse(courseId, studentId);
 		return isDrop;
 	}
 

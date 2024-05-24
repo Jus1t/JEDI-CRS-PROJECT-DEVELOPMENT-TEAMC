@@ -37,5 +37,7 @@ public interface AdminDAOInterface {
 	public ArrayList<Student> viewUnapprovedRegistrations();
 	
 	public ArrayList<Professor> viewProfessors();
+	
+	public void approveCourse(int courseId,int studentId);
 
 }

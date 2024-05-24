@@ -61,7 +61,7 @@ public class StudentDAOImpl implements StudentDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "INSERT INTO RegisteredCourse(studentId, courseId, regDate, semester) values(?,?,?,?)";
+			String sql = "INSERT INTO RegisteredCourse(studentId, courseId, regDate, semester,isApproved) values(?,?,?,?,0)";
 			statement = connection.prepareStatement(sql);
 
 			statement.setInt(1, studentId);
@@ -133,8 +133,9 @@ public class StudentDAOImpl implements StudentDAOInterface {
 
 			String sql = SQLConstants.VIEW_REGISTERED_COURSES;
 			statement = connection.prepareStatement(sql);
+			statement.setInt(1,studentId);
 			ResultSet resultSet = statement.executeQuery();
-
+			
 			while (resultSet.next()) {
 				Course course = new Course();
 				course.setCourseID(resultSet.getInt(1));
@@ -158,22 +159,19 @@ public class StudentDAOImpl implements StudentDAOInterface {
 
 	@Override
 	public double calculateFee(int studentId) throws SQLException {
-		double fee = 0;
+		int fee = 0;
 		statement = null;
 		try {
 			statement = connection.prepareStatement(SQLConstants.CALCULATE_FEES);
 			statement.setInt(1, studentId);
 			ResultSet rs = statement.executeQuery();
 			rs.next();
-			fee = rs.getDouble(1);
+			fee = rs.getInt(1);
 		} catch (SQLException e) {
 			System.out.println(e.getErrorCode());
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		} finally {
-			statement.close();
-			connection.close();
 		}
 
 		return fee;
@@ -194,9 +192,6 @@ public class StudentDAOImpl implements StudentDAOInterface {
 			System.out.println(e.getMessage());
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
-		} finally {
-			statement.close();
-			connection.close();
 		}
 
 		return seats < 10;

@@ -1,4 +1,6 @@
 package com.flipkart.client;
+import com.flipkart.bean.Course;
+import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.business.ProfessorServiceInterface;
 
 import java.util.*;
@@ -31,11 +33,10 @@ public class CRSProfessorMenu {
 			case 0:
 				return;
 			case 1:
-				System.out.println("Enter your profId ");
-				int profId2 = sc.nextInt();
+				
 				System.out.println("Enter your courseId ");
 				int courseId2 = sc.nextInt();
-				biz.selectCourse(profId2,courseId2);
+				biz.selectCourse(profId,courseId2);
 				break;
 			case 2:
 				System.out.println("Enter studentId");
@@ -47,16 +48,16 @@ public class CRSProfessorMenu {
 				biz.submitGrade(studentId,courseId,grade);
 				break;
 			case 3:
-				System.out.println("Enter your profId ");
-				int profid=sc.nextInt();
-				biz.getCoursesByProfessor(profid);
-						
+				ArrayList<Course>courseList=biz.getCoursesByProfessor(profId);
+				for(Course c:courseList) {
+					System.out.println(c.getCourseName());
+				}
 				break;
 			case 4:
-				System.out.println("Enter your profId ");
-				int profid3=sc.nextInt();
-				biz.getEnrolledStudents(profid3);
-						
+				ArrayList<EnrolledStudent>list=biz.getEnrolledStudents(profId);
+				for(EnrolledStudent c:list) {
+					System.out.println(c.getStudentId());
+				}	
 				break;
 			default:
 				System.out.println("Invalid choice");

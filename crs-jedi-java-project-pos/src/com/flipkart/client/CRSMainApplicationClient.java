@@ -21,9 +21,11 @@ public class CRSMainApplicationClient {
 		System.out.println("Hello, welcome to CRS Portal");
 		int choice = 1;
 		do {
-			System.out.println("Enter choice... \n1. Login\n2. Student registration\n3. Change password");
+			System.out.println("Enter choice... \n1. Login\n2. Student registration\n3. Change password\n0. Exit");
 			choice = sc.nextInt();
 			switch (choice) {
+			case 0:
+				return;
 			case 1:
 				// login
 				try {
@@ -42,9 +44,10 @@ public class CRSMainApplicationClient {
 				ChangePassword();
 				break;
 			default:
-				return;
+				System.out.println("Invalid input.");
+				continue;
 			}
-		} while (choice != 4);
+		} while (choice != 0);
 
 	}
 
@@ -103,11 +106,12 @@ public class CRSMainApplicationClient {
 		    
 		    if (role == null) {
 		        // Throw an exception if role is null
-		    	System.out.println("Invalid credentials!");
-		        throw new AuthenticationException();
+		    	System.out.println("Invalid credentials or unapproved students.");
+//		        throw new AuthenticationException();
+		    	return;
 		    }
 		} catch (AuthenticationException e) {
-		    throw e;
+//		    throw e;
 		}
 //		if (role == null) {
 //			System.out.println("Invalid credentials!");

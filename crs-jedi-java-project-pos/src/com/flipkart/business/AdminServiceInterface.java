@@ -34,5 +34,7 @@ public interface AdminServiceInterface {
 	public ArrayList<Student> viewUnapprovedRegistrations();
 
 	public ArrayList<Professor> viewProfessors();
+	
+	public void approveCourse(int courseId,int studentId);
 
 }

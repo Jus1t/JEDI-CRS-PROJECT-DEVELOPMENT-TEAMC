@@ -14,10 +14,10 @@ import java.util.*;
  * 
  */
 public class CRSStudentMenu {
-	public int studentid;
+	public int studentId;
 
 	public CRSStudentMenu(int id) {
-		studentid = id;
+		studentId = id;
 	}
 
 	/**
@@ -38,27 +38,25 @@ public class CRSStudentMenu {
 			System.out.println("3. View offered courses ");
 			System.out.println("4. Pay Bills ");
 			System.out.println("5. Drop Course ");
-			System.out.println("6. View Registered Courses ");
+			System.out.println("6. View Added Courses ");
 			System.out.println("7. Calculate Fee ");
-			System.out.println("8. Total Seat Available ");
+			System.out.println("8. Seat Availability Check");
 			System.out.println("9. Course Registration Status ");
-			System.out.println("10. Registration Status ");
 			System.out.println("0. Exit ");
 			a = sc.nextInt();
-			int studentId,courseId;
+			int courseId;
 			switch (a) {
 			case 0:
 				return;
 			case 1:
-				System.out.println("1. Enter studentId");
-				studentId = sc.nextInt();
 				System.out.println("1. Enter courseId");
 				courseId = sc.nextInt();
 				System.out.println("1. Enter semester");
 				String semester = sc.next();
 				try {
-					biz.registerCourse(studentid, courseId, semester);
+					biz.registerCourse(studentId, courseId, semester);
 				} catch (CourseLimitExceededException e) {
+					
 					System.out.println(e.getMessage());
 				}
 				NotificationServiceInterface not = new NotificationServiceOperations();
@@ -102,7 +100,8 @@ public class CRSStudentMenu {
 				case "online":
 					System.out.println("Enter your studentId");
 					int studentId2 = sc.nextInt();
-					System.out.println("Course is for $6000");
+					double fee = biz.calculateFee(studentId);
+					System.out.println("Your course bill is "+fee);
 					System.out.println("Enter your bank name");
 					String bankName = sc.next();
 					System.out.println("Enter your account holder name");
@@ -115,7 +114,7 @@ public class CRSStudentMenu {
 					PaymentServiceInterface psi = new PaymentServiceOperations();
 					NotificationServiceInterface not1 = new NotificationServiceOperations();
 					try {
-						boolean result = psi.onlinePayment(studentId2, 6000, bankName, bankHolderName, accountNo, ifsc);
+						boolean result = psi.onlinePayment(studentId2, fee, bankName, bankHolderName, accountNo, ifsc);
 						if (result == false) {
 							not1.sendNotifications(studentId2, "Payment failed!");
 							System.out.println("Payment failed!");
@@ -130,38 +129,32 @@ public class CRSStudentMenu {
 				}
 				break;
 			case 5:
-				System.out.println("Enter your student id");
-				studentId=sc.nextInt();
 				System.out.println("Enter course id to drop");
 				courseId=sc.nextInt();
 				biz.dropCourse(courseId, studentId);
 				break;
 			case 6:
-				System.out.println("Enter your student id");
-				studentId=sc.nextInt();
-				biz.viewRegisteredCourses(studentId);
+				ArrayList<Course> coursess = biz.viewRegisteredCourses(studentId);
+				for(Course c:coursess) {
+					System.out.println(c.getCourseName());
+				}
+//				System.out.println(coursess);
 				break;
 			case 7:
-				System.out.println("Enter your student id");
-				studentId=sc.nextInt();
-				biz.calculateFee(studentId);
+				double fee = biz.calculateFee(studentId);
+				System.out.println("Total fee is " + fee);
 				break;
 			case 8:
 				System.out.println("Enter your course id");
 				courseId=sc.nextInt();
-				biz.seatAvailable(courseId);
+				boolean ans = biz.seatAvailable(courseId);
+				System.out.println(ans);
 				break;
 			case 9:
-				System.out.println("Enter your student id");
-				studentId=sc.nextInt();
 				System.out.println("Enter your course id");
 				courseId=sc.nextInt();
-				biz.isRegistered(courseId, studentId);
-				break;
-			case 10:
-				System.out.println("Enter your student id");
-				studentId=sc.nextInt();
-				biz.getRegistrationStatus(studentId);
+				boolean ans1 = biz.isRegistered(courseId, studentId);
+				System.out.println("The course of id:"+courseId+" has registration status:"+ans1);
 				break;
 			default:
 				continue;
