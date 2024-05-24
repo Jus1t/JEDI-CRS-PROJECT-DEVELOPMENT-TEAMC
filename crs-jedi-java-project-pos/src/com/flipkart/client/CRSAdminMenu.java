@@ -3,6 +3,8 @@
  */
 package com.flipkart.client;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -25,12 +27,19 @@ public class CRSAdminMenu {
 	}
 
 	public void ShowOptions() {
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime myDateObj = LocalDateTime.now();
+		String formattedDate = myDateObj.format(myFormatObj);
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		AdminServiceInterface biz = new AdminServiceOperations();
 		int a = 1;
 		while (a != 0) {
-			System.out.println("Enter the choice: ");
+			System.out.println("");
+			System.out.println(formattedDate+ "Hello "+adminId);
+			System.out.println("\n*****************************");
+			System.out.println("**********Admin Menu*********");
+			System.out.println("*****************************");
 			System.out.println("1. Add course ");
 			System.out.println("2. Delete the course ");
 			System.out.println("3. Close registration ");
@@ -42,13 +51,15 @@ public class CRSAdminMenu {
 			System.out.println("9. View Professors");
 			System.out.println("10. Approve Course");
 			System.out.println("0. Exit ");
+			System.out.println("*****************************");
+			System.out.println("Choose from Menu: ");
 			a = sc.nextInt();
 
 			switch (a) {
 			case 0:
 				return;
 			case 1:
-				System.out.println("Enter courseId, name, instructorId, courseFee..");
+				System.out.println("Enter courseId, name, instructorId, courseFee");
 				int id = sc.nextInt();
 				String name = sc.next();
 				int instId = sc.nextInt();

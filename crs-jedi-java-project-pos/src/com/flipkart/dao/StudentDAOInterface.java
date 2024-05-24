@@ -1,71 +1,104 @@
+/*
+ * Interface: StudentDAOInterface
+ * Description: Interface for Student Data Access Object (DAO) operations.
+ * Author: Hardik and Shivam
+ */
 package com.flipkart.dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import com.flipkart.bean.Course;
-import com.flipkart.bean.CourseCatalogue;
-import com.flipkart.bean.GradeCard;
 import com.flipkart.exception.CourseLimitExceededException;
 import com.flipkart.exception.GradeNotAllotedException;
 
 public interface StudentDAOInterface {
 
-	public boolean registerCourse(int studentId, int courseId, String semester)
-			throws SQLException, CourseLimitExceededException;
+    /**
+     * Method: registerCourse
+     * Description: Registers a course for a student.
+     * @param studentId The ID of the student.
+     * @param courseId The ID of the course.
+     * @param semester The semester for which the course is being registered.
+     * @return True if course is registered successfully, false otherwise.
+     * @throws SQLException If a SQL exception occurs.
+     * @throws CourseLimitExceededException If the course limit is exceeded for the student.
+     */
+    public boolean registerCourse(int studentId, int courseId, String semester)
+            throws SQLException, CourseLimitExceededException;
 
-	public HashMap<Integer, String> viewResult(int id) throws GradeNotAllotedException;
+    /**
+     * Method: viewResult
+     * Description: Views the result of a student.
+     * @param id The ID of the student.
+     * @return A HashMap containing course IDs and corresponding grades.
+     * @throws GradeNotAllotedException If grades are not allotted yet.
+     */
+    public HashMap<Integer, String> viewResult(int id) throws GradeNotAllotedException;
 
-	public boolean dropCourse(int courseId, int studentId) throws SQLException;
+    /**
+     * Method: dropCourse
+     * Description: Drops a course for a student.
+     * @param courseId The ID of the course to be dropped.
+     * @param studentId The ID of the student.
+     * @return True if course is dropped successfully, false otherwise.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public boolean dropCourse(int courseId, int studentId) throws SQLException;
 
-	/**
-	 * Method to View list of Registered Courses
-	 * 
-	 * @param studentId
-	 * @return list of Registered Courses
-	 * @throws SQLException
-	 */
-	public ArrayList<Course> viewRegisteredCourses(int studentId) throws SQLException;
+    /**
+     * Method: viewRegisteredCourses
+     * Description: Views registered courses of a student.
+     * @param studentId The ID of the student.
+     * @return An ArrayList containing registered courses.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public ArrayList<Course> viewRegisteredCourses(int studentId) throws SQLException;
 
-	/**
-	 * Method to view grade card of the student
-	 * 
-	 * @param studentId
-	 * @return Grade Card
-	 * @throws SQLException
-	 */
+    /**
+     * Method: calculateFee
+     * Description: Calculates fee for a student.
+     * @param studentId The ID of the student.
+     * @return The calculated fee.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public double calculateFee(int studentId) throws SQLException;
 
-	public double calculateFee(int studentId) throws SQLException;
+    /**
+     * Method: seatAvailable
+     * Description: Checks if seat is available for a course.
+     * @param courseId The ID of the course.
+     * @return True if seat is available, false otherwise.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public boolean seatAvailable(int courseId) throws SQLException;
 
-	/**
-	 * Check if seat is available for that particular course
-	 * 
-	 * @param courseCode
-	 * @return seat availability status
-	 * @throws SQLException
-	 */
-	public boolean seatAvailable(int courseId) throws SQLException;
+    /**
+     * Method: isRegistered
+     * Description: Checks if a student is registered for a course.
+     * @param courseId The ID of the course.
+     * @param studentId The ID of the student.
+     * @return True if student is registered for the course, false otherwise.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public boolean isRegistered(int courseId, int studentId) throws SQLException;
 
-	/**
-	 * Method checks if the student is registered for that course
-	 * 
-	 * @param courseCode
-	 * @param studentId
-	 * @return Students registration status
-	 * @throws SQLException
-	 */
-	public boolean isRegistered(int courseId, int studentId) throws SQLException;
-
-	/**
-	 * Method to get student registration status
-	 * 
-	 * @param studentId
-	 * @return Student's registration status
-	 * @throws SQLException
-	 */
-	public boolean getRegistrationStatus(int studentId) throws SQLException;
-	
-	public ArrayList<Course> viewCourses(int studentId) throws SQLException;
+    /**
+     * Method: getRegistrationStatus
+     * Description: Retrieves registration status of a student.
+     * @param studentId The ID of the student.
+     * @return True if student is registered, false otherwise.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public boolean getRegistrationStatus(int studentId) throws SQLException;
+    
+    /**
+     * Method: viewCourses
+     * Description: Views available courses for a student.
+     * @param studentId The ID of the student.
+     * @return An ArrayList containing available courses.
+     * @throws SQLException If a SQL exception occurs.
+     */
+    public ArrayList<Course> viewCourses(int studentId) throws SQLException;
 
 }

@@ -23,7 +23,7 @@ public class UserDAOImpl implements UserDAOInterface{
 			
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " password updated!");
+			System.out.println(row + " Password Updated!");
 
 		} catch (SQLException se) {
 			System.out.println(se);

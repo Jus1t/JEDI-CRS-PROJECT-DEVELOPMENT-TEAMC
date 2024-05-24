@@ -25,7 +25,7 @@ public class ProfessorDAOImpl implements ProfessorDAOInterface {
 			statement.setString(3, grade);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " grade submitted!");
+			System.out.println(row + " Grade Submitted!");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -42,7 +42,7 @@ public class ProfessorDAOImpl implements ProfessorDAOInterface {
 			statement.setInt(2, courseId);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " course preference added!");
+			System.out.println(row + " Course Preference Added!");
 
 		} catch (SQLException se) {
 			System.out.println(se);

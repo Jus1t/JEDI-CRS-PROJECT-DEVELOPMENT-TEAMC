@@ -70,7 +70,7 @@ public class StudentDAOImpl implements StudentDAOInterface {
 			statement.setString(4, semester);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " course registered");
+			System.out.println(row + " Course Registered");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -117,7 +117,7 @@ public class StudentDAOImpl implements StudentDAOInterface {
 
 			int rows = statement.executeUpdate();
 
-			System.out.println(rows + " course dropped");
+			System.out.println(rows + " Course Dropped");
 		} catch (SQLException se) {
 			return false;
 		}
@@ -147,7 +147,7 @@ public class StudentDAOImpl implements StudentDAOInterface {
 
 			}
 
-			System.out.println(regCourselist.size() + " courses are registered by you.");
+			System.out.println(regCourselist.size() + " Courses are registered by you!");
 
 		} catch (SQLException se) {
 

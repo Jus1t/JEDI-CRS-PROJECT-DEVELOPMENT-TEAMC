@@ -3,6 +3,8 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.EnrolledStudent;
 import com.flipkart.business.ProfessorServiceInterface;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 import com.flipkart.business.ProfessorServiceOperations;
@@ -17,16 +19,25 @@ public class CRSProfessorMenu {
 	}
 
 	public void ShowOptions() {
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime myDateObj = LocalDateTime.now();
+		String formattedDate = myDateObj.format(myFormatObj);
 		Scanner sc = new Scanner(System.in);
 		ProfessorServiceInterface biz = new ProfessorServiceOperations();
 		int a = 1;
 		while (a != 0) {
-			System.out.println("Enter the choice: ");
+			System.out.println("");
+			System.out.println(formattedDate+" Hello "+profId);
+			System.out.println("\n--------------------------------");
+			System.out.println("-------Professor Menu-----------");
+			System.out.println("--------------------------------");
 			System.out.println("1. Select course ");
 			System.out.println("2. Submit grade ");
 			System.out.println("3. View your courses ");
 			System.out.println("4. View the Enrolled Students ");
 			System.out.println("0. Exit ");
+			System.out.println("--------------------------------");
+			System.out.printf("Choose From Menu: ");
 			a = sc.nextInt();
 
 			switch (a) {
@@ -34,16 +45,16 @@ public class CRSProfessorMenu {
 				return;
 			case 1:
 				
-				System.out.println("Enter your courseId ");
+				System.out.println("Enter CourseId ");
 				int courseId2 = sc.nextInt();
 				biz.selectCourse(profId,courseId2);
 				break;
 			case 2:
-				System.out.println("Enter studentId");
+				System.out.println("Enter StudentId");
 				int studentId=sc.nextInt();
-				System.out.println("Enter courseId");
+				System.out.println("Enter CourseId");
 				int courseId=sc.nextInt();
-				System.out.println("Enter grade");
+				System.out.println("Enter Grade");
 				String grade=sc.next();
 				biz.submitGrade(studentId,courseId,grade);
 				break;
@@ -60,7 +71,7 @@ public class CRSProfessorMenu {
 				}	
 				break;
 			default:
-				System.out.println("Invalid choice");
+				System.out.println("Invalid Choice!");
 				break;
 			}
 

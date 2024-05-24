@@ -1,3 +1,4 @@
+
 package com.flipkart.dao;
 
 import java.sql.Connection;
@@ -73,7 +74,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setBoolean(5, course.isOffered());
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " course added");
+			System.out.println(row + " Course Added!");
 
 		} catch (SQLException se) {
 			throw new CourseExistsAlreadyException(course.getCourseID());
@@ -93,11 +94,11 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			int row = statement.executeUpdate();
 
 			if (row == 0) {
-				System.out.println("Course not found");
+				System.out.println("Course Not Found!");
 				throw new CourseNotFoundException(id);
 			}
 
-			System.out.println(row + " course deleted");
+			System.out.println(row + " Course Deleted!");
 
 		} catch (SQLException se) {
 			throw new CourseNotFoundException(id);
@@ -118,7 +119,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setInt(1, id);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " course closed");
+			System.out.println(row + " Course Closed!");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -139,7 +140,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setInt(2, courseId);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " course assigned");
+			System.out.println(row + " Course Assigned!");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -176,7 +177,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setString(3, student.getBatch());
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " student added");
+			System.out.println(row + " Student Added!");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -238,7 +239,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setString(3, prof.getDepartment());
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " professor added");
+			System.out.println(row + " Professor Added!");
 
 		} catch (SQLException se) {
 			System.out.println(se);
@@ -257,7 +258,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 			statement.setInt(1, studentId);
 			int row = statement.executeUpdate();
 
-			System.out.println(row + " student approved.");
+			System.out.println(row + " Student Approved!");
 
 			// logger.info("Student with studentId: " + studentId + " approved by admin.");
 
@@ -299,7 +300,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			}
 
-			System.out.println(userList.size() + " students have pending-approval.");
+			System.out.println(userList.size() + " students have their approvals pending!");
 
 		} catch (SQLException se) {
 
@@ -336,7 +337,7 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			}
 
-			System.out.println(professorList.size() + " professors in the institute.");
+			System.out.println(professorList.size() + " professors are in the institute!");
 
 		} catch (SQLException se) {
 

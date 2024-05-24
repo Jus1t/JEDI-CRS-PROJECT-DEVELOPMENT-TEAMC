@@ -14,7 +14,7 @@ import com.flipkart.bean.Course;
 public class StudentServiceOperations implements StudentServiceInterface {
 	StudentDAOInterface sdi = new StudentDAOImpl();
 	public void payBills(int id) {
-		System.out.println("Bill payment");
+		System.out.println("Bill Payment");
 	}
 
 	public HashMap<Integer, String> viewResult(int id) throws GradeNotAllotedException{
@@ -28,7 +28,7 @@ public class StudentServiceOperations implements StudentServiceInterface {
 	}
 
 	public void viewcatalogue(int sid) {
-		System.out.println("Course catalog");
+		System.out.println("Course Catalog");
 	}
 
 	public boolean registerCourse(int studentId, int courseId, String semester) throws CourseAlreadyRegisteredException, CourseLimitExceededException {

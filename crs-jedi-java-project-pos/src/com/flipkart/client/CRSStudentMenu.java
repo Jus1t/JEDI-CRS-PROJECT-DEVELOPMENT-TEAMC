@@ -8,6 +8,8 @@ import com.flipkart.exception.GradeNotAllotedException;
 import com.flipkart.exception.PaymentFailedException;
 
 import java.sql.SQLException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 /**
@@ -28,11 +30,18 @@ public class CRSStudentMenu {
 
 	public void ShowOptions() throws CourseAlreadyRegisteredException, CourseLimitExceededException, GradeNotAllotedException, SQLException {
 		// TODO Auto-generated method stub
+		DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss");
+		LocalDateTime myDateObj = LocalDateTime.now();
+		String formattedDate = myDateObj.format(myFormatObj);
 		Scanner sc = new Scanner(System.in);
 		StudentServiceInterface biz = new StudentServiceOperations();
 		int a = 1;
 		while (a != 0) {
-			System.out.println("Enter the choice: ");
+			System.out.println("");
+			System.out.println(formattedDate+ " Hello "+studentId);
+			System.out.println("\n*****************************");
+			System.out.println("**********Student Menu*********");
+			System.out.println("*****************************");
 			System.out.println("1. Register course ");
 			System.out.println("2. View the result ");
 			System.out.println("3. View offered courses ");
@@ -43,15 +52,17 @@ public class CRSStudentMenu {
 			System.out.println("8. Seat Availability Check");
 			System.out.println("9. Course Registration Status ");
 			System.out.println("0. Exit ");
+			System.out.println("*****************************");
+			System.out.printf("Choose From Menu: ");
 			a = sc.nextInt();
 			int courseId;
 			switch (a) {
 			case 0:
 				return;
 			case 1:
-				System.out.println("1. Enter courseId");
+				System.out.println("1. Enter CourseId");
 				courseId = sc.nextInt();
-				System.out.println("1. Enter semester");
+				System.out.println("1. Enter Semester");
 				String semester = sc.next();
 				try {
 					biz.registerCourse(studentId, courseId, semester);
@@ -63,11 +74,9 @@ public class CRSStudentMenu {
 				not.sendNotifications(studentId, "You have successfully registered for course!");
 				break;
 			case 2:
-				System.out.println("1. Enter your studentId");
 				HashMap<Integer, String> res=null;
-				int studentId1 = sc.nextInt();
 				try {
-					 res = biz.viewResult(studentId1);
+					 res = biz.viewResult(studentId);
 				}catch(GradeNotAllotedException e) {
 					System.out.println(e.getMessage());
 				}
@@ -76,30 +85,24 @@ public class CRSStudentMenu {
 					System.out.println(e.getMessage());
 				}
 				for (Map.Entry<Integer, String> entry : res.entrySet()) {
-					System.out.println("Key: " + entry.getKey() + ", Value: " + entry.getValue());
+					System.out.println("CourseId: " + entry.getKey() + ", Grade: " + entry.getValue());
 				}
 				break;
 			case 3:
-				System.out.println("1. Enter your studentId");
-				studentId=sc.nextInt();
 				StudentServiceInterface biz2 = new StudentServiceOperations();
 				ArrayList<Course> x = biz2.viewCourses(studentId);
-				System.out.println("\n\n");
 				for (Course c : x) {
 					System.out.println(c.getCourseName());
 				}
-				System.out.println("\n\n");
 				break;
 			case 4:
-				System.out.println("Choose your mode of payment (online or offline)");
+				System.out.println("Mode of Payment (online or offline)");
 				String mode = sc.next();
 				switch (mode) {
 				case "offline":
 					System.out.println("Please pay your bills to the nearest bank, will update you on success!");
 					break;
 				case "online":
-					System.out.println("Enter your studentId");
-					int studentId2 = sc.nextInt();
 					double fee = biz.calculateFee(studentId);
 					System.out.println("Your course bill is "+fee);
 					System.out.println("Enter your bank name");
@@ -114,12 +117,12 @@ public class CRSStudentMenu {
 					PaymentServiceInterface psi = new PaymentServiceOperations();
 					NotificationServiceInterface not1 = new NotificationServiceOperations();
 					try {
-						boolean result = psi.onlinePayment(studentId2, fee, bankName, bankHolderName, accountNo, ifsc);
+						boolean result = psi.onlinePayment(studentId, fee, bankName, bankHolderName, accountNo, ifsc);
 						if (result == false) {
-							not1.sendNotifications(studentId2, "Payment failed!");
+							not1.sendNotifications(studentId, "Payment failed!");
 							System.out.println("Payment failed!");
 						} else {
-							not1.sendNotifications(studentId2, "Payment Successful!");
+							not1.sendNotifications(studentId, "Payment Successful!");
 							System.out.println("Payment successful!");
 						}
 					}catch(PaymentFailedException e) {
@@ -154,7 +157,7 @@ public class CRSStudentMenu {
 				System.out.println("Enter your course id");
 				courseId=sc.nextInt();
 				boolean ans1 = biz.isRegistered(courseId, studentId);
-				System.out.println("The course of id:"+courseId+" has registration status:"+ans1);
+				System.out.println("The course of id:"+courseId+" has registration status: "+ans1);
 				break;
 			default:
 				continue;
