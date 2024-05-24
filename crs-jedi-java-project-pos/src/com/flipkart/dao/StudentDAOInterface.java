@@ -55,7 +55,7 @@ public interface StudentDAOInterface {
 	 * @return Students registration status
 	 * @throws SQLException
 	 */
-	public boolean isRegistered(String courseCode, int studentId) throws SQLException;
+	public boolean isRegistered(int courseId, int studentId) throws SQLException;
 
 	/**
 	 * Method to get student registration status

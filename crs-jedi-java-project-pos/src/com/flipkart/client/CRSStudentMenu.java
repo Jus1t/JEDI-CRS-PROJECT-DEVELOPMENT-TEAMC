@@ -7,6 +7,7 @@ import com.flipkart.exception.CourseLimitExceededException;
 import com.flipkart.exception.GradeNotAllotedException;
 import com.flipkart.exception.PaymentFailedException;
 
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -22,9 +23,10 @@ public class CRSStudentMenu {
 	/**
 	 * @param args
 	 * @throws CourseAlreadyRegisteredException
+	 * @throws SQLException 
 	 */
 
-	public void ShowOptions() throws CourseAlreadyRegisteredException, CourseLimitExceededException, GradeNotAllotedException {
+	public void ShowOptions() throws CourseAlreadyRegisteredException, CourseLimitExceededException, GradeNotAllotedException, SQLException {
 		// TODO Auto-generated method stub
 		Scanner sc = new Scanner(System.in);
 		StudentServiceInterface biz = new StudentServiceOperations();
@@ -35,17 +37,23 @@ public class CRSStudentMenu {
 			System.out.println("2. View the result ");
 			System.out.println("3. View the catalogue ");
 			System.out.println("4. Pay Bills ");
+			System.out.println("5. Drop Course ");
+			System.out.println("6. View Registered Courses ");
+			System.out.println("7. Calculate Fee ");
+			System.out.println("8. Total Seat Available ");
+			System.out.println("9. Course Registration Status ");
+			System.out.println("10. Registration Status ");
 			System.out.println("0. Exit ");
 			a = sc.nextInt();
-
+			int studentId,courseId;
 			switch (a) {
 			case 0:
 				return;
 			case 1:
 				System.out.println("1. Enter studentId");
-				int studentId = sc.nextInt();
+				studentId = sc.nextInt();
 				System.out.println("1. Enter courseId");
-				int courseId = sc.nextInt();
+				courseId = sc.nextInt();
 				System.out.println("1. Enter semester");
 				String semester = sc.next();
 				try {
@@ -118,6 +126,40 @@ public class CRSStudentMenu {
 					}
 					break;
 				}
+				break;
+			case 5:
+				System.out.println("Enter your student id");
+				studentId=sc.nextInt();
+				System.out.println("Enter course id to drop");
+				courseId=sc.nextInt();
+				biz.dropCourse(courseId, studentId);
+				break;
+			case 6:
+				System.out.println("Enter your student id");
+				studentId=sc.nextInt();
+				biz.viewRegisteredCourses(studentId);
+				break;
+			case 7:
+				System.out.println("Enter your student id");
+				studentId=sc.nextInt();
+				biz.calculateFee(studentId);
+				break;
+			case 8:
+				System.out.println("Enter your course id");
+				courseId=sc.nextInt();
+				biz.seatAvailable(courseId);
+				break;
+			case 9:
+				System.out.println("Enter your student id");
+				studentId=sc.nextInt();
+				System.out.println("Enter your course id");
+				courseId=sc.nextInt();
+				biz.isRegistered(courseId, studentId);
+				break;
+			case 10:
+				System.out.println("Enter your student id");
+				studentId=sc.nextInt();
+				biz.getRegistrationStatus(studentId);
 				break;
 			default:
 				continue;

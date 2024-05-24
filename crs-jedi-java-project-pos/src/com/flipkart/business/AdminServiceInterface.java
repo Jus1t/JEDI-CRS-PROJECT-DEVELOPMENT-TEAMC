@@ -11,7 +11,7 @@ import com.flipkart.exception.CourseNotFoundException;
 
 public interface AdminServiceInterface {
 
-	public void addCourse(int id, String name, int instId) throws CourseExistsAlreadyException;
+	public void addCourse(int id, String name, int instId,int courseFee) throws CourseExistsAlreadyException;
 
 	public void deleteCourse(int id) throws CourseNotFoundException;
 

@@ -47,12 +47,13 @@ public class CRSAdminMenu {
 			case 0:
 				return;
 			case 1:
-				System.out.println("Enter courseId, name, instructorId...");
+				System.out.println("Enter courseId, name, instructorId, courseFee..");
 				int id = sc.nextInt();
 				String name = sc.next();
 				int instId = sc.nextInt();
+				int courseFee = sc.nextInt();
 				try {
-					biz.addCourse(id,name,instId);
+					biz.addCourse(id,name,instId,courseFee);
 				}catch (CourseExistsAlreadyException e) {
 					
 					System.out.println(e.getMessage());

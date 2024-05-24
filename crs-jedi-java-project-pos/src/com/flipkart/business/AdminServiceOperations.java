@@ -19,7 +19,7 @@ import com.flipkart.bean.Student;
 
 public class AdminServiceOperations implements AdminServiceInterface {
 	AdminDAOInterface adi = new AdminDAOImpl();
-	public void addCourse(int id, String name, int instId) throws CourseExistsAlreadyException {
+	public void addCourse(int id, String name, int instId,int courseFee) throws CourseExistsAlreadyException {
 		
 		if(AdminValidator.isValidNewCourse(name)==false)
 		{
@@ -28,7 +28,7 @@ public class AdminServiceOperations implements AdminServiceInterface {
 		}
 		
 		try {
-			Course course = new Course(id, name, instId);
+			Course course = new Course(id, name, instId,courseFee);
 			adi.addCourse(course);
 		}catch (CourseExistsAlreadyException e) {
 			throw e;

@@ -225,14 +225,15 @@ public class StudentDAOImpl implements StudentDAOInterface {
 
 
 	@Override
-	public boolean isRegistered(String courseCode, int studentId) throws SQLException {
+	public boolean isRegistered(int courseId, int studentId) throws SQLException {
 		statement = null;
 		try {
 
 			String sql = SQLConstants.IS_REGISTERED;
 			statement = connection.prepareStatement(sql);
-			statement.setInt(1, studentId);
-
+			statement.setInt(1, courseId);
+			statement.setInt(2, studentId);
+//			" select courseId from RegisteredCourse where courseId=? and studentId=? "
 			int rows = statement.executeUpdate();
 			
 			if (rows>0) {

@@ -21,7 +21,7 @@ public class CRSMainApplicationClient {
 		System.out.println("Hello, welcome to CRS Portal");
 		int choice = 1;
 		do {
-			System.out.println("Enter choice... \n1. Login\n2. Student registration\n3. Change password/n0.Exit");
+			System.out.println("Enter choice... \n1. Login\n2. Student registration\n3. Change password");
 			choice = sc.nextInt();
 			switch (choice) {
 			case 1:
@@ -44,7 +44,7 @@ public class CRSMainApplicationClient {
 			default:
 				return;
 			}
-		} while (choice != 0);
+		} while (choice != 4);
 
 	}
 
