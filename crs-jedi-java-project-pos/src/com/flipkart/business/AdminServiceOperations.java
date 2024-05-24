@@ -3,6 +3,8 @@ import com.flipkart.dao.AdminDAOInterface;
 import com.flipkart.exception.AuthenticationException;
 import com.flipkart.exception.CourseExistsAlreadyException;
 import com.flipkart.exception.CourseNotFoundException;
+import com.flipkart.validator.AdminValidator;
+import com.flipkart.validator.LoginValidator;
 import com.flipkart.dao.AdminDAOImpl;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -18,6 +20,13 @@ import com.flipkart.bean.Student;
 public class AdminServiceOperations implements AdminServiceInterface {
 	AdminDAOInterface adi = new AdminDAOImpl();
 	public void addCourse(int id, String name, int instId) throws CourseExistsAlreadyException {
+		
+		if(AdminValidator.isValidNewCourse(name)==false)
+		{
+			System.out.println("Please enter the name of the course");
+			return;
+		}
+		
 		try {
 			Course course = new Course(id, name, instId);
 			adi.addCourse(course);
@@ -51,6 +60,12 @@ public class AdminServiceOperations implements AdminServiceInterface {
 	}
 	
 	public String verifyCredentials(int id,String password) throws AuthenticationException {
+		if(!(LoginValidator.isloginvalid(id,password)))
+		{
+			System.out.println("Enter the id or password");
+			return null;
+			
+		}
 		String role= adi.verifyCredentials(id, password);
 		return role;
 	}
