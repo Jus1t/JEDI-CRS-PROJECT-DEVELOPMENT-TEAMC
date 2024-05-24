@@ -29,4 +29,6 @@ public class SQLConstants {
 	public static final String IS_REGISTERED=" select courseId from RegisteredCourse where courseId=? and studentId=? ";
 	public static final String GET_REGISTRATION_STATUS=" select isApproved from Student where studentId = ? ";
 	public static final String SET_REGISTRATION_STATUS="update Student set isApproved = true  where studentId=?";
+	public static final String GET_ENROLLED_STUDENTS="select c.courseId, c.courseName, rc.studentId from Course as c inner join RegisteredCourse as rc on c.courseId = rc.courseId where c.instructorId = ? order by c.courseId";
+	public static final String GET_COURSES="select * from Course where instructorId=?";
 }
