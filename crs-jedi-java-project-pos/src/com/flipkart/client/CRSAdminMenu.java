@@ -37,6 +37,8 @@ public class CRSAdminMenu {
 			System.out.println("4. Show Courses ");
 			System.out.println("5. Assign Courses ");
 			System.out.println("6. Add Professor ");
+			System.out.println("7. Approve Student ");
+			System.out.println("8. View Pending Admission");
 			System.out.println("0. Exit ");
 			a = sc.nextInt();
 

@@ -12,6 +12,11 @@ public class Professor extends User {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Professor() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public String getDepartment() {
 		return department;
 	}

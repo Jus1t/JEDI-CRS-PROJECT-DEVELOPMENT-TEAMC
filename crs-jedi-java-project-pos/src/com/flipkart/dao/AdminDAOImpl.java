@@ -250,6 +250,104 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 		
 	}
+	@Override
+	public void approveStudent(int studentId) {
+		
+		statement = null;
+		try {
+			String sql = SQLConstants.APPROVE_STUDENT_QUERY;
+			statement = connection.prepareStatement(sql);
+			
+			statement.setInt(1,studentId);
+			int row = statement.executeUpdate();
+			
+			System.out.println(row + " student approved.");
+			
+			
+			//logger.info("Student with studentId: " + studentId + " approved by admin.");
+			
+		}catch(SQLException se) {
+			
+			System.out.println(se.getMessage());
+			
+		}
+		
+	}
+
+	@Override
+	public ArrayList<Student> viewUnapprovedRegistrations() {
+		
+		statement = null;
+		ArrayList<Student> userList = new ArrayList<Student>();
+		try {
+			
+			String sql = SQLConstants.VIEW_PENDING_ADMISSION_QUERY;
+			statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+
+			while(resultSet.next()) {
+				// int id, String name, String phone, String email, String password, String branch, String batch
+				// "select userId, username, password, phone, email, role, studentId, branch, batch from Student natural join User where isApproved = 0";
+				Student user = new Student();
+				user.setId(resultSet.getInt(1));
+				user.setName(resultSet.getString(2));
+				user.setPassword(resultSet.getString(3));
+				user.setPhone(resultSet.getString(4));
+				user.setRole("student");
+				user.setEmail(resultSet.getString(5));
+				user.setBranch(resultSet.getString(8));
+				user.setBatch(resultSet.getString(9));
+
+				userList.add(user);
+				
+			}
+			
+			System.out.println(userList.size() + " students have pending-approval.");
+			
+		}catch(SQLException se) {
+			
+			System.out.println(se.getMessage());
+			
+		}
+		
+		return userList;
+		
+	}
+
+	@Override
+	public ArrayList<Professor> viewProfessors() {
+		statement = null;
+		ArrayList<Professor> professorList = new ArrayList<>();
+		try {
+			
+			String sql = SQLConstants.VIEW_PROFESSOR_QUERY;
+			statement = connection.prepareStatement(sql);
+			ResultSet resultSet = statement.executeQuery();
+			
+			while(resultSet.next()) {
+				
+				Professor professor = new Professor();
+				professor.setId(resultSet.getInt(1));
+				professor.setName(resultSet.getString(2));
+				professor.setPassword(resultSet.getString(3));
+				professor.setPhone(resultSet.getString(4));
+				professor.setRole("professor");
+				professor.setEmail(resultSet.getString(5));
+				professor.setDepartment(resultSet.getString(8));
+				professor.setDesignation(resultSet.getString(9));
+				professorList.add(professor);
+				
+			}
+			
+			System.out.println(professorList.size() + " professors in the institute.");
+			
+		}catch(SQLException se) {
+			
+			System.out.println(se.getMessage());
+			
+		}
+		return professorList;
+	}
 	
 	
 

@@ -108,4 +108,69 @@ public class StudentDAOImpl implements StudentDAOInterface {
 		return null;
 	}
 
+
+	@Override
+	public boolean dropCourse(String courseCode, int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public ArrayList<Course> viewCourses(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public ArrayList<Course> viewRegisteredCourses(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+	@Override
+	public double calculateFee(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public boolean seatAvailable(String courseCode) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public int numOfRegisteredCourses(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+
+	@Override
+	public boolean isRegistered(String courseCode, int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public boolean getRegistrationStatus(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public void setRegistrationStatus(int studentId) throws SQLException {
+		// TODO Auto-generated method stub
+		
+	}
+	
+	
+
 }
