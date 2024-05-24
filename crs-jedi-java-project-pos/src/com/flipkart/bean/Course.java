@@ -6,7 +6,8 @@ public class Course {
 	private int instructorID;
 	private int enrolled_students;
 	private boolean isOffered = true;
-
+	private int courseFee;
+	
 	public boolean isOffered() {
 		return isOffered;
 	}
@@ -19,10 +20,11 @@ public class Course {
 
 	}
 
-	public Course(int id, String name, int instId) {
+	public Course(int id, String name, int instId, int courseFee) {
 		this.courseID = id;
 		this.courseName = name;
 		this.instructorID = instId;
+		this.courseFee = courseFee;
 	}
 
 	public int getCourseID() {
@@ -55,5 +57,13 @@ public class Course {
 
 	public void setEnrolled_students(int enrolled_students) {
 		this.enrolled_students = enrolled_students;
+	}
+
+	public int getCourseFee() {
+		return courseFee;
+	}
+
+	public void setCourseFee(int courseFee) {
+		this.courseFee = courseFee;
 	}
 }

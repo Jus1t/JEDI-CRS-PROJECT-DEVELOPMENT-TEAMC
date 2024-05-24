@@ -22,4 +22,11 @@ public class SQLConstants {
 	public static final String APPROVE_STUDENT_QUERY = "update Student set isApproved = 1 where studentId = ?";
 	public static final String VIEW_PENDING_ADMISSION_QUERY = "select userId, username, password, phone, email, role, studentId, branch, batch from Student natural join User where isApproved = 0";
 	public static final String VIEW_PROFESSOR_QUERY = "select userId, username, password, phone, email, role, profId, department, designation from Professor natural join User";
+	public static final String DROP_COURSE_QUERY = "delete from RegisteredCourse where courseId = ? AND studentId = ?;";
+	public static final String VIEW_REGISTERED_COURSES=" select * from Course inner join RegisteredCourse on Course.courseId = RegisteredCourse.courseId where RegisteredCourse.studentId = ?";
+	public static final String CALCULATE_FEES  = "select sum(courseFee) from Course where courseId in (select courseId from RegisteredCourse where studentId = ?);";
+	public static final String GET_SEATS = "select enrolledStudents from Course where courseId = ?;";
+	public static final String IS_REGISTERED=" select courseId from RegisteredCourse where courseId=? and studentId=? ";
+	public static final String GET_REGISTRATION_STATUS=" select isApproved from Student where studentId = ? ";
+	public static final String SET_REGISTRATION_STATUS="update Student set isApproved = true  where studentId=?";
 }

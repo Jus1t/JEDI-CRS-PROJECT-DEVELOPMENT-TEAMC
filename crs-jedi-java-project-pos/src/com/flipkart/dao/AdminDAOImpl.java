@@ -45,6 +45,9 @@ public class AdminDAOImpl implements AdminDAOInterface {
 				course.setCourseID(resultSet.getInt(1));
 				course.setCourseName(resultSet.getString(2));
 				course.setInstructorID(resultSet.getInt(3));
+				course.setEnrolled_students(resultSet.getInt(4));
+				course.setOffered(resultSet.getBoolean(5));
+				course.setCourseFee(resultSet.getInt(6));
 				courseList.add(course);
 
 			}

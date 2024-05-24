@@ -12,23 +12,12 @@ import com.flipkart.exception.GradeNotAllotedException;
 
 public interface StudentDAOInterface {
 
-	public CourseCatalogue viewCatalogue();
-
 	public boolean registerCourse(int studentId, int courseId, String semester)
 			throws SQLException, CourseLimitExceededException;
 
 	public HashMap<Integer, String> viewResult(int id) throws GradeNotAllotedException;
 
-	public boolean dropCourse(String courseCode, int studentId) throws SQLException;
-
-	/**
-	 * Method to get the list of courses available from course catalog
-	 * 
-	 * @param studentId
-	 * @return list of Courses
-	 * @throws SQLException
-	 */
-	public ArrayList<Course> viewCourses(int studentId) throws SQLException;
+	public boolean dropCourse(int courseId, int studentId) throws SQLException;
 
 	/**
 	 * Method to View list of Registered Courses
@@ -56,17 +45,7 @@ public interface StudentDAOInterface {
 	 * @return seat availability status
 	 * @throws SQLException
 	 */
-	public boolean seatAvailable(String courseCode) throws SQLException;
-
-	/**
-	 * Method to get the list of courses registered by the student Number of
-	 * registered courses for a student
-	 * 
-	 * @param studentId
-	 * @return Number of registered Courses
-	 * @throws SQLException
-	 */
-	public int numOfRegisteredCourses(int studentId) throws SQLException;
+	public boolean seatAvailable(int courseId) throws SQLException;
 
 	/**
 	 * Method checks if the student is registered for that course
@@ -87,11 +66,4 @@ public interface StudentDAOInterface {
 	 */
 	public boolean getRegistrationStatus(int studentId) throws SQLException;
 
-	/**
-	 * Method to set student registration status
-	 * 
-	 * @param studentId
-	 * @throws SQLException
-	 */
-	public void setRegistrationStatus(int studentId) throws SQLException;
 }
