@@ -3,6 +3,8 @@ package com.flipkart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.*;
 
 public class NotificationDAOImpl implements NotificationDAOInterface {
@@ -14,7 +16,7 @@ public class NotificationDAOImpl implements NotificationDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into Notification(notificationId,userId,content) values (?, ?, ?)";
+			String sql = SQLConstants.NOTIFICATION_SEND;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, notificationId);
 			statement.setInt(2, userId);

@@ -3,6 +3,8 @@ package com.flipkart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.*;
 public class UserDAOImpl implements UserDAOInterface{
 	private PreparedStatement statement = null;
@@ -13,7 +15,7 @@ public class UserDAOImpl implements UserDAOInterface{
 		statement = null;
 		try {
 
-			String sql = "update User SET password=? where userId=? AND password=?";
+			String sql =SQLConstants.CHANGE_PASSWORD; 
 			statement = connection.prepareStatement(sql);
 			statement.setString(1, newPassword);
 			statement.setInt(2, userId);

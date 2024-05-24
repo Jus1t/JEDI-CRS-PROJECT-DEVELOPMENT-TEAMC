@@ -3,6 +3,8 @@ package com.flipkart.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.utils.*;
 public class ProfessorDAOImpl implements ProfessorDAOInterface {
 	private PreparedStatement statement = null;
@@ -12,7 +14,7 @@ public class ProfessorDAOImpl implements ProfessorDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into GradeCard(studentId, courseId, grade) values (?, ?, ?)";
+			String sql = SQLConstants.GRADE_CARD_INSERTION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, studentId);
 			statement.setInt(2, courseId);
@@ -30,7 +32,7 @@ public class ProfessorDAOImpl implements ProfessorDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into TeacherPreference(profId, courseId) values (?, ?)";
+			String sql = SQLConstants.TEACHER_PREFERENCE_INSERTION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, profId);
 			statement.setInt(2, courseId);

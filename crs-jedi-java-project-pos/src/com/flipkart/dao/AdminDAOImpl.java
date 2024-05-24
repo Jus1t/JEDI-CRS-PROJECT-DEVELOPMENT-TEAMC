@@ -12,6 +12,7 @@ import com.flipkart.bean.Course;
 import com.flipkart.bean.Professor;
 import com.flipkart.bean.Student;
 import com.flipkart.bean.User;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.AuthenticationException;
 import com.flipkart.exception.CourseExistsAlreadyException;
 import com.flipkart.exception.CourseNotFoundException;
@@ -32,7 +33,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		ArrayList<Course> courseList = new ArrayList<>();
 		try {
 
-			String sql = "select courseId, courseName, instructorId from Course";
+//			String sql = "select courseId, courseName, instructorId from Course";
+			String sql=SQLConstants.COURSE_DETAILS;
 			statement = connection.prepareStatement(sql);
 
 			ResultSet resultSet = statement.executeQuery();
@@ -61,7 +63,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into Course(courseId, courseName, instructorId, enrolledStudents, isOffered) values (?, ?, ?, ?, ?)";
+//			String sql = "insert into Course(courseId, courseName, instructorId, enrolledStudents, isOffered) values (?, ?, ?, ?, ?)";
+			String sql=SQLConstants.COURSE_INSERTION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, course.getCourseID());
 			statement.setString(2, course.getCourseName());
@@ -83,7 +86,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "delete from Course where courseId = ?";
+//			String sql = "delete from Course where courseId = ?";
+			String sql=SQLConstants.COURSE_DELETION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			int row = statement.executeUpdate();
@@ -111,7 +115,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "update Course set isOffered=false where courseId = ?";
+//			String sql = "update Course set isOffered=false where courseId = ?";
+			String sql=SQLConstants.CLOSE_REGISTRATION;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			int row = statement.executeUpdate();
@@ -130,7 +135,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "update Course set instructorId=? where courseId = ?";
+//			String sql = "update Course set instructorId=? where courseId = ?";
+			String sql=SQLConstants.ASSIGN_COURSE;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, instructorId);
 			statement.setInt(2, courseId);
@@ -148,7 +154,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
+//			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
+			String sql=SQLConstants.INSERT_USER;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, student.getId());
 			statement.setString(2, student.getName());
@@ -164,7 +171,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 		try {
 
-			String sql = "insert into Student(studentId,branch,batch) values (?, ?, ?)";
+//			String sql = "insert into Student(studentId,branch,batch) values (?, ?, ?)";
+			String sql=SQLConstants.INSERT_STUDENT;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, student.getId());
 			statement.setString(2, student.getBranch());
@@ -186,7 +194,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 		try {
 
-			String sql = "select * from User where userId=? AND password=?";
+//			String sql = "select * from User where userId=? AND password=?";
+			String sql=SQLConstants.VERIFY_CREDENTIALS;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, id);
 			statement.setString(2, password);
@@ -208,7 +217,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 		statement = null;
 		try {
 
-			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
+//			String sql = "insert into User(userId, UserName, phone, email, password, role) values (?, ?, ?, ?, ?,?)";
+			String sql=SQLConstants.INSERT_USER;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, prof.getId());
 			statement.setString(2, prof.getName());
@@ -224,7 +234,8 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 		try {
 
-			String sql = "insert into Professor(profId,designation,department) values (?, ?, ?)";
+//			String sql = "insert into Professor(profId,designation,department) values (?, ?, ?)";
+			String sql=SQLConstants.INSERT_PROFESSOR;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, prof.getId());
 			statement.setString(2, prof.getDesignation());

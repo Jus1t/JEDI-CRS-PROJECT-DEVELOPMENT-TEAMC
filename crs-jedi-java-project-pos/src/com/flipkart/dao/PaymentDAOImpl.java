@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.PaymentFailedException;
 import com.flipkart.utils.*;
 
@@ -15,7 +16,7 @@ public class PaymentDAOImpl implements PaymentDAOInterface{
 		statement = null;
 		try {
 
-			String sql = "insert into Payment(paymentId,studentId,amount, paymentMode) values (?, ?, ?,?)";
+			String sql = SQLConstants.ONLINE_PAYMENT;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, paymentId);
 			statement.setInt(2, studentId);
@@ -33,7 +34,7 @@ public class PaymentDAOImpl implements PaymentDAOInterface{
 		statement = null;
 		try {
 
-			String sql = "insert into BankDetails(paymentId,bankName,bankHolderName,ifsc,accountNo) values (?, ?, ?,?,?)";
+			String sql = SQLConstants.INSERT_BANK_DETAILS;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, paymentId);
 			statement.setString(2, bankName);

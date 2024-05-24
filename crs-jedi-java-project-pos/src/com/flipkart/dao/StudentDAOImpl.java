@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.flipkart.bean.Course;
 import com.flipkart.bean.CourseCatalogue;
 import com.flipkart.bean.GradeCard;
+import com.flipkart.constants.SQLConstants;
 import com.flipkart.exception.CourseAlreadyRegisteredException;
 import com.flipkart.exception.CourseLimitExceededException;
 import com.flipkart.exception.GradeNotAllotedException;
@@ -30,7 +31,7 @@ public class StudentDAOImpl implements StudentDAOInterface {
 		Course x=null;
 		try {
 
-			String sql = "select courseId, courseName, instructorId, enrolledStudents, isOffered from Course where courseId=?";
+			String sql = SQLConstants.REGISTER_COURSE;
 			statement = connection.prepareStatement(sql);
 			statement.setInt(1, courseId);
 			ResultSet resultSet = statement.executeQuery();
