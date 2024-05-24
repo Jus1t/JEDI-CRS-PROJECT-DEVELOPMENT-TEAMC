@@ -22,6 +22,8 @@ public class CRSProfessorMenu {
 			System.out.println("Enter the choice: ");
 			System.out.println("1. Select course ");
 			System.out.println("2. Submit grade ");
+			System.out.println("3. View your courses ");
+			System.out.println("4. View the Enrolled Students ");
 			System.out.println("0. Exit ");
 			a = sc.nextInt();
 
@@ -43,6 +45,18 @@ public class CRSProfessorMenu {
 				System.out.println("Enter grade");
 				String grade=sc.next();
 				biz.submitGrade(studentId,courseId,grade);
+				break;
+			case 3:
+				System.out.println("Enter your profId ");
+				int profid=sc.nextInt();
+				biz.getCoursesByProfessor(profid);
+						
+				break;
+			case 4:
+				System.out.println("Enter your profId ");
+				int profid3=sc.nextInt();
+				biz.getEnrolledStudents(profid3);
+						
 				break;
 			default:
 				System.out.println("Invalid choice");
