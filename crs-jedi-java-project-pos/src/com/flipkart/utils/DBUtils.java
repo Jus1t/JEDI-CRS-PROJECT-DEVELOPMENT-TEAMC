@@ -23,6 +23,7 @@ public class DBUtils {
                 String url = prop.getProperty("db_url");
                 String user = prop.getProperty("user");
                 String password = prop.getProperty("pass");
+//                System.out.print(url+" "+user+" "+password);
                 
 				conn = DriverManager.getConnection(url, user, password);
 //				conn = DriverManager.getConnection(DB_URL, USER, PASS);
