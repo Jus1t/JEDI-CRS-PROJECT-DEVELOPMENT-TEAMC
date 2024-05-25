@@ -300,7 +300,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			}
 
-			System.out.println(userList.size() + " students have their approvals pending!");
 
 		} catch (SQLException se) {
 
@@ -337,7 +336,6 @@ public class AdminDAOImpl implements AdminDAOInterface {
 
 			}
 
-			System.out.println(professorList.size() + " professors are in the institute!");
 
 		} catch (SQLException se) {
 

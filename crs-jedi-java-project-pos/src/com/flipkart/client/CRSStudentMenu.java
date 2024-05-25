@@ -38,7 +38,7 @@ public class CRSStudentMenu {
 		int a = 1;
 		while (a != 0) {
 			System.out.println("");
-			System.out.println(formattedDate+ " Hello "+studentId);
+			System.out.println(formattedDate);
 			System.out.println("\n*****************************");
 			System.out.println("**********Student Menu*********");
 			System.out.println("*****************************");
@@ -51,13 +51,14 @@ public class CRSStudentMenu {
 			System.out.println("7. Calculate Fee ");
 			System.out.println("8. Seat Availability Check");
 			System.out.println("9. Course Registration Status ");
-			System.out.println("0. Exit ");
+			System.out.println("0. Log Out ");
 			System.out.println("*****************************");
 			System.out.printf("Choose From Menu: ");
 			a = sc.nextInt();
 			int courseId;
 			switch (a) {
 			case 0:
+				System.out.println("\n\nLogged Out\n\n");
 				return;
 			case 1:
 				System.out.println("1. Enter CourseId");
@@ -84,16 +85,30 @@ public class CRSStudentMenu {
 					GradeNotAllotedException e = new GradeNotAllotedException();
 					System.out.println(e.getMessage());
 				}
+				System.out.println("\n\n+-----------+------------+");
+				System.out.println("| Course ID |   Grade    |");
+				System.out.println("+-----------+------------+");
+
 				for (Map.Entry<Integer, String> entry : res.entrySet()) {
-					System.out.println("CourseId: " + entry.getKey() + ", Grade: " + entry.getValue());
+				    System.out.printf("| %-10d| %-10s |\n", entry.getKey(), entry.getValue());
 				}
+
+				System.out.println("+-----------+------------+");
+
 				break;
 			case 3:
 				StudentServiceInterface biz2 = new StudentServiceOperations();
 				ArrayList<Course> x = biz2.viewCourses(studentId);
+				System.out.println("\n\n+----------------------+------------+");
+				System.out.println("|     Course Name      | Course ID  |");
+				System.out.println("+----------------------+------------+");
+
 				for (Course c : x) {
-					System.out.println(c.getCourseName());
+				    System.out.printf("| %-20s | %-10s |\n", c.getCourseName(), c.getCourseID());
 				}
+
+				System.out.println("+----------------------+------------+");
+
 				break;
 			case 4:
 				System.out.println("Mode of Payment (online or offline)");
@@ -138,9 +153,16 @@ public class CRSStudentMenu {
 				break;
 			case 6:
 				ArrayList<Course> coursess = biz.viewRegisteredCourses(studentId);
-				for(Course c:coursess) {
-					System.out.println(c.getCourseName());
+				System.out.println("\n\n+----------------------+------------+");
+				System.out.println("|     Course Name      | Course ID  |");
+				System.out.println("+----------------------+------------+");
+
+				for (Course c : coursess) {
+				    System.out.printf("| %-20s | %-10s |\n", c.getCourseName(), c.getCourseID());
 				}
+
+				System.out.println("+----------------------+------------+");
+
 //				System.out.println(coursess);
 				break;
 			case 7:
@@ -151,13 +173,16 @@ public class CRSStudentMenu {
 				System.out.println("Enter your course id");
 				courseId=sc.nextInt();
 				boolean ans = biz.seatAvailable(courseId);
-				System.out.println(ans);
+				if (ans)System.out.println("Seat is available.\n");
+				else System.out.println("Sorry, no seats available.\n");
+				
 				break;
 			case 9:
 				System.out.println("Enter your course id");
 				courseId=sc.nextInt();
 				boolean ans1 = biz.isRegistered(courseId, studentId);
-				System.out.println("The course of id:"+courseId+" has registration status: "+ans1);
+				String resword = ans1?"Registered":"Not registered";
+				System.out.println("The course of id:"+courseId+" has status: "+resword);
 				break;
 			default:
 				continue;

@@ -36,7 +36,7 @@ public class CRSAdminMenu {
 		int a = 1;
 		while (a != 0) {
 			System.out.println("");
-			System.out.println(formattedDate+ "Hello "+adminId);
+			System.out.println(formattedDate);
 			System.out.println("\n*****************************");
 			System.out.println("**********Admin Menu*********");
 			System.out.println("*****************************");
@@ -50,13 +50,14 @@ public class CRSAdminMenu {
 			System.out.println("8. View Pending Approvals");
 			System.out.println("9. View Professors");
 			System.out.println("10. Approve Course");
-			System.out.println("0. Exit ");
+			System.out.println("0. Log Out ");
 			System.out.println("*****************************");
 			System.out.println("Choose from Menu: ");
 			a = sc.nextInt();
 
 			switch (a) {
 			case 0:
+				System.out.println("\n\nLogged Out\n\n");
 				return;
 			case 1:
 				System.out.println("Enter courseId, name, instructorId, courseFee");
@@ -90,11 +91,16 @@ public class CRSAdminMenu {
 				break;
 			case 4:
 				ArrayList<Course> x = biz.showCourses();
-				System.out.println("\n\n");	
+				System.out.printf("\n\n| %-20s | %-10s | %-10s |\n", "Course Id", "CourseName", "ProfessorId");
+
+				// Print table separator
+				System.out.println("+----------------------+------------+------------+");
+
+				// Print each course in a row
 				for(Course c : x) {
-					System.out.println(c.getCourseName());
+				    System.out.printf("| %-20s | %-10s | %-10s |\n", c.getCourseID(), c.getCourseName(), c.getInstructorID());
 				}
-				System.out.println("\n\n");
+				System.out.println("\n");	
 				break;
 			case 5:
 				System.out.println("Enter courseId");
@@ -133,15 +139,32 @@ public class CRSAdminMenu {
 			case 8:
 				AdminServiceInterface ad=new AdminServiceOperations();
 				ArrayList<Student>studentList=ad.viewUnapprovedRegistrations();
-				for(Student st:studentList) {
-					System.out.println(st.getId()+" "+st.getName());
+				System.out.println("\n"+studentList.size() + " students have their approvals pending!\n");
+
+				System.out.printf("| %-5s | %-20s |\n", "ID", "Name");
+
+				// Print table separator
+				System.out.println("+-------+----------------------");
+
+				// Print each student in a row
+				for (Student st : studentList) {
+				    System.out.printf("| %-5s | %-20s |\n", st.getId(), st.getName());
 				}
 				break;
 			case 9:
-				AdminServiceInterface ad1=new AdminServiceOperations();
-				ArrayList<Professor>professorList=ad1.viewProfessors();
-				for(Professor professor:professorList) {
-					System.out.println(professor.getId()+" "+professor.getName());
+				AdminServiceInterface ad1 = new AdminServiceOperations();
+				ArrayList<Professor> professorList = ad1.viewProfessors();
+				System.out.println("\n"+professorList.size() + " professors are in the institute!\n");
+
+				// Print table header
+				System.out.printf("| %-5s | %-20s |\n", "ID", "Name");
+
+				// Print table separator
+				System.out.println("+-------+----------------------");
+
+				// Print each professor in a row
+				for (Professor professor : professorList) {
+				    System.out.printf("| %-5s | %-20s |\n", professor.getId(), professor.getName());
 				}
 				break;
 			case 10:

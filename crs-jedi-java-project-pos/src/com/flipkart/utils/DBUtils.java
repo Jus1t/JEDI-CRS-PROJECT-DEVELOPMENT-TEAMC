@@ -7,10 +7,6 @@ import java.sql.*;
 import java.util.Properties;
 
 public class DBUtils {
-	static final String DB_URL = "jdbc:mysql://localhost/CRS-Schema";
-	static final String USER = "root";
-	static final String PASS = "yashwant";
-
 	public static Connection getConnection() {
 		Connection conn = null;
 		if (conn != null)

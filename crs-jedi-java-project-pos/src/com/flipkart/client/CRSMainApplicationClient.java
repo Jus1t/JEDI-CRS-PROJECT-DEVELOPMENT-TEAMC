@@ -28,11 +28,12 @@ public class CRSMainApplicationClient {
 			System.out.println("1. Login");
 			System.out.println("2. Student Registration");
 			System.out.println("3. Update password");
-			System.out.println("4. Exit");
+			System.out.println("4. Exit the application");
 			System.out.println("Enter your input");
 			choice = sc.nextInt();
 			switch (choice) {
 			case 0:
+				System.out.println("\n\nExited\n\n");
 				return;
 			case 1:
 				// login
@@ -130,13 +131,13 @@ public class CRSMainApplicationClient {
 
 		switch (role) {
 		case "professor":
-			System.out.println("Logged in Successfully as Professor");
+			System.out.println("\n\nLogged in Successfully as Professor");
 			CRSProfessorMenu profMenu = new CRSProfessorMenu(id);
 			profMenu.ShowOptions();
 			// prof menu
 			break;
 		case "student":
-			System.out.println("Logged in Successfully as Student");
+			System.out.println("\n\nLogged in Successfully as Student");
 			// student menu
 			CRSStudentMenu stMenu = new CRSStudentMenu(id);
 			try {
@@ -149,7 +150,7 @@ public class CRSMainApplicationClient {
 			}
 			break;
 		case "admin":
-			System.out.println("Logged in Successfully as Admin");
+			System.out.println("\n\nLogged in Successfully as Admin");
 			CRSAdminMenu adMenu = new CRSAdminMenu(id);
 			adMenu.ShowOptions();
 			// admin menu

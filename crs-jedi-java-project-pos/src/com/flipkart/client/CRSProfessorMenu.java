@@ -27,7 +27,7 @@ public class CRSProfessorMenu {
 		int a = 1;
 		while (a != 0) {
 			System.out.println("");
-			System.out.println(formattedDate+" Hello "+profId);
+			System.out.println(formattedDate);
 			System.out.println("\n--------------------------------");
 			System.out.println("-------Professor Menu-----------");
 			System.out.println("--------------------------------");
@@ -35,13 +35,14 @@ public class CRSProfessorMenu {
 			System.out.println("2. Submit grade ");
 			System.out.println("3. View your courses ");
 			System.out.println("4. View the Enrolled Students ");
-			System.out.println("0. Exit ");
+			System.out.println("0. Log Out ");
 			System.out.println("--------------------------------");
 			System.out.printf("Choose From Menu: ");
 			a = sc.nextInt();
 
 			switch (a) {
 			case 0:
+				System.out.println("\n\nLogged Out\n\n");
 				return;
 			case 1:
 				
@@ -60,15 +61,26 @@ public class CRSProfessorMenu {
 				break;
 			case 3:
 				ArrayList<Course>courseList=biz.getCoursesByProfessor(profId);
-				for(Course c:courseList) {
-					System.out.println(c.getCourseName());
+				System.out.println("\n\n+----------------------+------------+");
+				System.out.println("|     Course Name      | Course ID  |");
+				System.out.println("+----------------------+------------+");
+
+				for (Course c : courseList) {
+				    System.out.printf("| %-20s | %-10s |\n", c.getCourseName(), c.getCourseID());
 				}
 				break;
 			case 4:
 				ArrayList<EnrolledStudent>list=biz.getEnrolledStudents(profId);
-				for(EnrolledStudent c:list) {
-					System.out.println(c.getStudentId());
-				}	
+				System.out.println("\n\n+------------+");
+				System.out.println("| Student ID |");
+				System.out.println("+------------+");
+
+				for (EnrolledStudent c : list) {
+				    System.out.printf("| %-10s |\n", c.getStudentId());
+				}
+
+				System.out.println("+------------+");
+
 				break;
 			default:
 				System.out.println("Invalid Choice!");
